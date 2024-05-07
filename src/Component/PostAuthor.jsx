@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Loader from "./Loader";
+import Loader2 from "./Loader2";
 import ReactTimeAgo from "react-time-ago";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
@@ -47,7 +47,7 @@ const PostAuthor = ({ authorID, createdAt }) => {
   }, [createdAt]);
 
   if (loading) {
-    return <Loader />;
+    return <Loader2 />;
   }
 
   if (error) {
