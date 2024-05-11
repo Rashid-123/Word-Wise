@@ -59,7 +59,7 @@ const CreatePosts = () => {
     "Entertainment",
     "Art",
     "Investment",
-
+    "Programming",
     "Weather",
     "Others",
   ];
