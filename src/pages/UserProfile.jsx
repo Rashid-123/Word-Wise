@@ -34,10 +34,10 @@ const UserProfile = () => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        const { name, email, avatar } = response.data;
+        const { name, email, avatarURL } = response.data;
         setName(name);
         setemail(email);
-        setAvatar(avatar);
+        setAvatar(avatarURL);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -56,7 +56,7 @@ const UserProfile = () => {
         postData,
         { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
       );
-      setAvatar(response?.data.avatar);
+      setAvatar(response?.data.avatarURL);
     } catch (error) {
       console.error("Error changing avatar:", error);
       // You can add code here to display an error message to the user
@@ -82,7 +82,7 @@ const UserProfile = () => {
         }
       );
 
-      if (response.status == 200) {
+      if (response.status === 200) {
         // log user out
         navigate("/logout");
       }
@@ -100,10 +100,7 @@ const UserProfile = () => {
         <div className="profile__details">
           <div className="avatar__wrapper">
             <div className="profile__avatar">
-              <img
-                src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${avatar}`}
-                alt=""
-              />
+              <img src={avatar} alt="" />
             </div>
             {/* Form to update avatar */}
             <form className="avatar__form">

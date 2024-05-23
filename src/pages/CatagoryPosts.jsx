@@ -46,13 +46,13 @@ const CatagoryPosts = () => {
               category,
               description,
               creator,
-              thumbnail,
+              thumbnailURL,
               createdAt,
             }) => (
               <PostItem
                 key={id}
                 postID={id}
-                thumbnail={thumbnail}
+                thumbnail={thumbnailURL}
                 category={category}
                 title={title}
                 description={description}

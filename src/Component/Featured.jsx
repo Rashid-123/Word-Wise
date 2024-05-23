@@ -32,10 +32,7 @@ const Featured = ({
           </Link>
         </div>
       </div>
-      <img
-        src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${thumbnail}`}
-        alt="Featured Post Thumbnail"
-      />
+      <img src={thumbnail} alt="Featured Post Thumbnail" />
     </article>
   );
 };

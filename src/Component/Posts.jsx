@@ -46,7 +46,7 @@ const Posts = () => {
         <Featured
           key={uuidv4()}
           postID={random._id}
-          thumbnail={random.thumbnail}
+          thumbnail={random.thumbnailURL}
           category={random.category}
           title={random.title}
           description={random.description}
@@ -65,13 +65,13 @@ const Posts = () => {
               category,
               description,
               creator,
-              thumbnail,
+              thumbnailURL,
               createdAt,
             }) => (
               <PostItem
                 key={id}
                 postID={id}
-                thumbnail={thumbnail}
+                thumbnail={thumbnailURL}
                 category={category}
                 title={title}
                 description={description}

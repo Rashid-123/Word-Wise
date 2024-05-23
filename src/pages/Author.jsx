@@ -30,14 +30,11 @@ const Author = () => {
     <section className="authors">
       {authors.length > 0 ? (
         <div className="container authors__container">
-          {authors.map(({ _id: id, avatar, name, posts }) => {
+          {authors.map(({ _id: id, avatarURL, name, posts }) => {
             return (
               <Link className="author" key={id} to={`/posts/users/${id}`}>
                 <div className="author__avatar">
-                  <img
-                    src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${avatar}`}
-                    alt={name}
-                  />
+                  <img src={avatarURL} alt={name} />
                 </div>
                 {/* <div className="author__info"> */}
                 <h4>{name}</h4>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Loader from "../Component/Loader";
 import { UserContext } from "../Context/userContext";
@@ -11,7 +11,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
-
+  const { id } = useParams();
   // redirect to login page for any user who isn't logged in
   useEffect(() => {
     if (!token) {
@@ -53,10 +53,7 @@ const Dashboard = () => {
             <article key={post._id} className="dashboard__post">
               <div className="dashboard__post-info">
                 <div className="dashboard__post-thumbnail">
-                  <img
-                    src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${post.thumbnail}`}
-                    alt=""
-                  />
+                  <img src={post.thumbnailURL} alt="" />
                 </div>
                 <h5 className="dashboard_title">{post.title}</h5>
               </div>
@@ -67,7 +64,7 @@ const Dashboard = () => {
                 <Link to={`/posts/${post._id}/edit`} className="btn sm primary">
                   Edit
                 </Link>
-                <DeletePost postId={post._id} />
+                <DeletePost postId={id} />
               </div>
             </article>
           ))}
