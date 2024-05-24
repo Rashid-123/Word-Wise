@@ -18,7 +18,9 @@ const Posts = () => {
           `${process.env.REACT_APP_BASE_URL}/posts`
         );
         console.log(response.data);
-        setPosts(response?.data);
+        if (Array.isArray(response.data)) {
+          setPosts(response.data);
+        }
       } catch (err) {
         console.log(err);
       }
