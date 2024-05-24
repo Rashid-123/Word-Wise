@@ -23,7 +23,7 @@ const PostDetail = () => {
     const getUser = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/users/${currentUser.id}`,
+          `${process.env.REACT_APP_BASE_URL}/users/${currentUser?.id}`,
           {
             withCredentials: true,
             headers: { Authorization: `Bearer ${token}` },
@@ -38,7 +38,7 @@ const PostDetail = () => {
     };
 
     getUser();
-  }, [currentUser.id, token]);
+  }, [currentUser?.id, token]);
   //
   useEffect(() => {
     const getPost = async () => {
