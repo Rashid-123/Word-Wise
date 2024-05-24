@@ -94,9 +94,15 @@ const UserProfile = () => {
   return (
     <section className="profile">
       <div className="container profile__container">
-        <Link to={`/myposts/${currentUser.id}`} className="my__post">
-          My posts
-        </Link>
+        <div>
+          <Link to={`/myposts/${currentUser.id}`} className="my__post">
+            My posts
+          </Link>
+          <Link to={`/bookmark/${currentUser.id}`} className="my__post">
+            Bookmarked Posts
+          </Link>
+        </div>
+
         <div className="profile__details">
           <div className="avatar__wrapper">
             <div className="profile__avatar">

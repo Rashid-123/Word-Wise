@@ -1,7 +1,7 @@
 import react, { useState, useContext, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import PostAuthor from "../Component/PostAuthor";
-
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { UserContext } from "../Context/userContext";
 import Loader from "../Component/Loader";
 import axios from "axios";
@@ -12,9 +12,34 @@ const PostDetail = () => {
   const [creatorID, setCreatorID] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
+  //
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  //
   const { currentUser } = useContext(UserContext);
+  const token = currentUser?.token;
+  const userId = currentUser?.id;
 
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/users/${currentUser.id}`,
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        if (response.data.bookmarks.includes(id)) {
+          setIsBookmarked(true);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    getUser();
+  }, [currentUser.id, token]);
+  //
   useEffect(() => {
     const getPost = async () => {
       setIsLoading(true);
@@ -32,6 +57,38 @@ const PostDetail = () => {
     getPost();
   }, []);
 
+  const toggleBookmark = async () => {
+    const postId = id;
+    try {
+      if (isBookmarked) {
+        // Remove bookmark
+        await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/bookmarks/remove`,
+          { userId, postId },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } else {
+        // Add bookmark
+        await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/bookmarks/add`,
+          { userId, postId },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      }
+      setIsBookmarked(!isBookmarked);
+    } catch (error) {
+      console.error("Error toggling bookmark", error);
+      setError("Failed to update bookmark");
+    }
+  };
   if (isLoading) {
     return <Loader />;
   }
@@ -59,6 +116,29 @@ const PostDetail = () => {
             <img src={post.thumbnailURL} alt="" />
           </div>
           <p dangerouslySetInnerHTML={{ __html: post.description }}></p>
+          {currentUser?.id && (
+            <div className="bookmark" onClick={toggleBookmark}>
+              {isBookmarked ? (
+                <FaBookmark
+                  style={{
+                    width: "25px",
+                    height: "25px",
+                    color: "gold",
+                    cursor: "pointer",
+                  }}
+                />
+              ) : (
+                <FaRegBookmark
+                  style={{
+                    width: "25px",
+                    height: "25px",
+                    color: "grey",
+                    cursor: "pointer",
+                  }}
+                />
+              )}
+            </div>
+          )}
         </div>
       )}
     </section>

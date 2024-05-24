@@ -17,7 +17,9 @@ import CatagoryPosts from "./pages/CatagoryPosts.jsx";
 import AuthorPosts from "./pages/AuthorPosts.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Logout from "./pages/Logout.jsx";
+import Bookmark from "./pages/Bookmark.jsx";
 import UserProvider from "./Context/userContext.js";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,6 +43,7 @@ const router = createBrowserRouter([
       { path: "posts/users/:id", element: <AuthorPosts /> },
       { path: "myposts/:id", element: <Dashboard /> },
       { path: "logout", element: <Logout /> },
+      { path: "bookmark/:id", element: <Bookmark /> },
     ],
   },
 ]);

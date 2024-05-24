@@ -1,63 +1,53 @@
-import React, { useState, useEffect } from "react";
-import PostItem from "../Component/PostItem";
+import React, { useState, useEffect, useContext } from "react";
+import PostItem from "../Component/PostItem.jsx";
 import axios from "axios";
-import Loader from "../Component/Loader";
-import { useParams } from "react-router-dom";
+import Loader from "../Component/Loader.jsx";
+import { UserContext } from "../Context/userContext.js";
 
-const AuthorPosts = () => {
+const Bookmark = () => {
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
+  const { currentUser } = useContext(UserContext);
+  const token = currentUser?.token;
 
-  const { id } = useParams();
   useEffect(() => {
+    if (!currentUser?.id || !token) {
+      console.error("User ID or token is missing");
+      return;
+    }
+
     const fetchPosts = async () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/posts`
+          `${process.env.REACT_APP_BASE_URL}/users/bookmarkedPost/${currentUser.id}`,
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
         setPosts(response?.data);
       } catch (err) {
-        console.log(err);
+        console.error("Error fetching bookmarked posts:", err);
       }
       setIsLoading(false);
     };
+
     fetchPosts();
-  }, []);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/users/${id}`
-        );
-        setUser(response?.data);
-      } catch (err) {
-        console.log(err);
-      }
-      setIsLoading(false);
-    };
-    fetchUser();
-  }, [id]);
-
-  // console.log(random);
+  }, [currentUser?.id, token]);
 
   if (isLoading) {
     return <Loader />;
   }
- 
-  const filteredPosts = posts.filter((post) => post.creator === id);
+
   return (
     <section className="container">
       <div className="category_container">
-        <h2 className="category_label"> Blogs by {user.name}</h2>
+        <h2 className="category_label">Your Bookmarks</h2>
       </div>
-      {filteredPosts.length > 0 ? (
+      {posts.length > 0 ? (
         <div className="posts__container">
-          {filteredPosts.map(
+          {posts.map(
             ({
               _id: id,
               title,
@@ -87,4 +77,4 @@ const AuthorPosts = () => {
   );
 };
 
-export default AuthorPosts;
+export default Bookmark;
