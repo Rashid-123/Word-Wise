@@ -1,30 +1,13 @@
-import React, { useState, useEffect } from "react";
-import PostItem from "./PostItem";
-import Featured from "./Featured.jsx";
+import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import Loader from "../Component/Loader.jsx";
+import { v4 as uuidv4 } from "uuid";
+import Post from "../admin_components/Post.jsx";
 
-const Posts = () => {
+const Allposts = () => {
   const [posts, setPosts] = useState([]);
-  const [featuredPost, setFeaturedPost] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchFeaturedPost = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/posts/getfeatured`
-        );
-        console.log(response.data);
-        setFeaturedPost(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-      setIsLoading(false);
-    };
-    fetchFeaturedPost();
-  }, []);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -51,9 +34,8 @@ const Posts = () => {
 
   return (
     <section className="container">
-      <Featured post={featuredPost} />
-      {posts.length > 0 ? (
-        <div className="posts__container">
+      {posts?.length > 0 ? (
+        <div className="admin_allPosts">
           {posts.map(
             ({
               _id: id,
@@ -64,7 +46,7 @@ const Posts = () => {
               thumbnailURL,
               createdAt,
             }) => (
-              <PostItem
+              <Post
                 key={id}
                 postID={id}
                 thumbnail={thumbnailURL}
@@ -84,4 +66,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default Allposts;

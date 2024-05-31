@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { UserContext } from "../Context/userContext.js";
 
-const Login = () => {
+const AdminLogin = () => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -13,35 +13,36 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const { setCurrentUser } = useContext(UserContext);
+  const { setCurrentUser, setIsAdmin } = useContext(UserContext);
 
   const changeInputHandler = (e) => {
     setUserData((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
     });
   };
-
-  const loginUser = async (e) => {
+  const loginAdmin = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/users/login`,
+        `${process.env.REACT_APP_BASE_URL}/users/login/admin`,
         userData
       );
       const user = await response.data;
       setCurrentUser(user);
+      setIsAdmin(true);
       navigate("/");
     } catch (err) {
       setError(err.response.data.message);
     }
   };
+
   return (
     <section className="login ">
       <div className="container">
-        <h2>sign in</h2>
-        <form className="form  login__form" onSubmit={loginUser}>
+        <h2>Admin Login</h2>
+        <form className="form  login__form" onSubmit={loginAdmin}>
           {error && <p className="form__error-message">{error}</p>}
           <input
             type="text"
@@ -61,16 +62,9 @@ const Login = () => {
             Login
           </button>
         </form>
-        <small>
-          Don't have an account ?{"  "}
-          <Link to="/Register">Sign up</Link>
-        </small>{" "}
-      </div>
-      <div className="login_admin">
-        <Link to="/admin_login">Admin Login</Link>
       </div>
     </section>
   );
 };
 
-export default Login;
+export default AdminLogin;

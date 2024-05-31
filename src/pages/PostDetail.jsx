@@ -6,6 +6,7 @@ import { UserContext } from "../Context/userContext";
 import Loader from "../Component/Loader";
 import axios from "axios";
 import DeletePost from "./DeletePost";
+import { FaRegClipboard } from "react-icons/fa";
 const PostDetail = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
@@ -14,6 +15,7 @@ const PostDetail = () => {
   const [isLoading, setIsLoading] = useState(false);
   //
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isReported, setIsReported] = useState(false);
   //
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
@@ -31,6 +33,9 @@ const PostDetail = () => {
         );
         if (response.data.bookmarks.includes(id)) {
           setIsBookmarked(true);
+        }
+        if (response.data.reports.includes(id)) {
+          setIsReported(true);
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -56,14 +61,45 @@ const PostDetail = () => {
     };
     getPost();
   }, []);
-
+  //
+  const toggleReport = async () => {
+    const postId = id;
+    try {
+      if (isReported) {
+        await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/users/removeReport`,
+          { userId, postId },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } else {
+        await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/users/addReport`,
+          { userId, postId },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      }
+      setIsReported(!isReported);
+    } catch (error) {
+      console.error("Error toggling bookmark", error);
+      setError("Failed to update bookmark");
+    }
+  };
+  //
   const toggleBookmark = async () => {
     const postId = id;
     try {
       if (isBookmarked) {
         // Remove bookmark
         await axios.post(
-          `${process.env.REACT_APP_BASE_URL}/bookmarks/remove`,
+          `${process.env.REACT_APP_BASE_URL}/users/removeBookmark`,
           { userId, postId },
           {
             headers: {
@@ -74,7 +110,7 @@ const PostDetail = () => {
       } else {
         // Add bookmark
         await axios.post(
-          `${process.env.REACT_APP_BASE_URL}/bookmarks/add`,
+          `${process.env.REACT_APP_BASE_URL}/users/addBookmark`,
           { userId, postId },
           {
             headers: {
@@ -111,32 +147,60 @@ const PostDetail = () => {
               </div>
             )}
           </div>
+
           <h1 className="post_title">{post.title}</h1>
           <div className="post-detail__thumbnail">
             <img src={post.thumbnailURL} alt="" />
           </div>
           <p dangerouslySetInnerHTML={{ __html: post.description }}></p>
           {currentUser?.id && (
-            <div className="bookmark" onClick={toggleBookmark}>
-              {isBookmarked ? (
-                <FaBookmark
-                  style={{
-                    width: "25px",
-                    height: "25px",
-                    color: "gold",
-                    cursor: "pointer",
-                  }}
-                />
-              ) : (
-                <FaRegBookmark
-                  style={{
-                    width: "25px",
-                    height: "25px",
-                    color: "grey",
-                    cursor: "pointer",
-                  }}
-                />
-              )}
+            <div className="bookmark">
+              <div onClick={toggleBookmark}>
+                {isBookmarked ? (
+                  <FaBookmark
+                    style={{
+                      width: "25px",
+                      height: "25px",
+                      color: "yellow",
+                      cursor: "pointer",
+                    }}
+                  />
+                ) : (
+                  <FaRegBookmark
+                    style={{
+                      width: "25px",
+                      height: "25px",
+                      color: "grey",
+                      cursor: "pointer",
+                    }}
+                  />
+                )}
+              </div>
+              <div onClick={toggleReport}>
+                {isReported ? (
+                  <FaRegClipboard
+                    style={{
+                      padding: "5px",
+                      // backgroundColor: "red",
+                      borderRadius: "25%",
+                      cursor: "pointer",
+                    }}
+                    size={34}
+                    color="red"
+                  />
+                ) : (
+                  <FaRegClipboard
+                    style={{
+                      padding: "5px",
+                      // backgroundColor: "white",
+                      borderRadius: "25%",
+                      cursor: "Pointer",
+                    }}
+                    size={34}
+                    color="white"
+                  />
+                )}
+              </div>
             </div>
           )}
         </div>

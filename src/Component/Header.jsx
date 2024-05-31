@@ -11,6 +11,7 @@ const Header = () => {
   const [isAuthorActive, setIsAuthorActive] = useState(false);
   const [isLoginActive, setIsLoginActive] = useState(false);
   const { currentUser } = useContext(UserContext);
+  const { isAdmin } = useContext(UserContext);
   const location = useLocation();
 
   localStorage.setItem("isCreateActive", JSON.stringify(true));
@@ -89,7 +90,7 @@ const Header = () => {
         <Link to="/" className="nav__logo" onClick={closeNavHandler}>
           <h2 className="wordwise">WordWise</h2>
         </Link>
-
+        {isAdmin && <Link to={"/admin"}>Dashboard</Link>}
         {currentUser?.id && isNavShowing && (
           <ul className="nav__menu">
             <li>

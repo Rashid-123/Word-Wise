@@ -183,7 +183,8 @@ nav {
 } */
 .anchor {
   /* position: relative; */
-  font-size: 17px;
+  font-size: 15px;
+  letter-spacing: 0.2px;
   padding: 5px 16px;
   border-radius: var(--radius-3);
   transition: var(--transition);
@@ -286,7 +287,8 @@ footer {
   border-color: var(--color--dark-border2);
 }
 .featured__post img {
-  width: 400px;
+  width: 390px;
+  height: 270px;
   border-radius: var(--radius-3);
 }
 
@@ -501,6 +503,19 @@ input:focus {
   background: #182233;
   height: 10rem !important;
 }
+.login_admin {
+  padding: 7px 10px;
+  background-color: #2563eb;
+  border: 1px solid var(--color--dark-border2);
+  border-radius: var(--radius-2);
+  color: white;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.login_admin:active {
+  color: #020617;
+  border-color: var(--color--dark-border);
+}
 /*------------------------------- AUTHOR ------------------*/
 
 .authors__container {
@@ -547,6 +562,7 @@ input:focus {
   border-radius: var(--radius-3);
   border: 1px solid var(--color--dark-border2);
   transition: var(--transition);
+  margin-left: 30px;
 }
 .my__post:hover {
   border-color: var(--color--dark-border);
@@ -637,6 +653,7 @@ input:focus {
 }
 .dashboard__post-thumbnail {
   width: 4rem;
+  height: 2.5rem;
   border-radius: var(--radius-1);
   overflow: hidden;
 }
@@ -811,3 +828,115 @@ input:focus {
   }
 }
 /* Header.css */
+/* //////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////---------- ADMIN DASHBOARD ------------------------------//////// */
+
+.admin_navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.admin_navbar li {
+  padding: 5px 18px;
+  border-radius: var(--radius-3);
+  border: 1px solid var(--color--dark-border2);
+}
+
+/* /////////////////////////////////////// */
+/* /////----------- Dashboard Home ----------/ */
+.Box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 8rem;
+  row-gap: 2rem;
+  column-gap: 3rem;
+}
+.dashboard_box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px 50px;
+  border: 1px solid var(--color--dark-border);
+  border-radius: var(--radius-2);
+  transform: var(--transition);
+}
+
+.dashboard_box h3 {
+  color: #cbbbff;
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+/* ////////////////////////////////////////////////////////// */
+/* ///----------------- REPORT ----------------------- */
+.report {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px 10px;
+  border-radius: var(--radius-3);
+  border: 1px solid var(--color--dark-border);
+}
+.report_user {
+  display: flex;
+  gap: 100px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 30px;
+  border-radius: var(--radius-3);
+  border: 1px solid var(--color--dark-border);
+}
+
+.report_user img {
+  margin-bottom: 10px;
+  width: 50px;
+  border-radius: 50%;
+}
+.report_post {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 100px;
+  padding: 20px 30px;
+  border-radius: var(--radius-3);
+  border: 1px solid var(--color--dark-border);
+}
+.report_post img {
+  width: 110px;
+  border-radius: var(--radius-2);
+}
+
+.admin_Posts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 25px;
+  border: 1px solid var(--color--dark-border);
+  margin-bottom: 20px;
+}
+.admin_Posts img {
+  width: 110px;
+  height: 60px;
+  border-radius: 10px;
+}
+.btn_1 {
+  padding: 7px 9px;
+  background-color: var(--color--dark-border2);
+  color: white;
+  border: 1px solid var(--color--dark-border);
+  border-radius: var(--radius-2);
+  margin-right: 30px;
+}
+
+.btn_2 {
+  padding: 7px 9px;
+  background-color: rgb(30, 111, 173);
+  color: white;
+  border: 1px solid var(--color--dark-border);
+  border-radius: var(--radius-2);
+  margin-right: 30px;
+}
