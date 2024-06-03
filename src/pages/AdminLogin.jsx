@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { UserContext } from "../Context/userContext.js";
 
 const AdminLogin = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -37,7 +39,9 @@ const AdminLogin = () => {
       setError(err.response.data.message);
     }
   };
-
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <section className="login ">
       <div className="container">
@@ -52,12 +56,19 @@ const AdminLogin = () => {
             onChange={changeInputHandler}
           />
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
             name="password"
             value={userData.password}
             onChange={changeInputHandler}
-          />
+          />{" "}
+          <button
+            type="button"
+            className="btn secondary"
+            onClick={togglePasswordVisibility}
+          >
+            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+          </button>
           <button type="submit" className="btn primary">
             Login
           </button>

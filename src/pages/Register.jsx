@@ -1,23 +1,47 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { registerUser } from "../../../server/controllers/userControllers";
 import axios from "axios";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const Register = () => {
   const [userData, setUserData] = useState({
     name: "",
     email: "",
     password: "",
     password2: "",
+    otp: "",
   });
 
+  const [otpSend, setOtpsend] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const changeInputHandler = (e) => {
     setUserData((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
     });
+  };
+
+  const sendOtp = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/users/sendOTP`,
+        { email: userData.email }
+      );
+      setOtpsend(true);
+      // setError(response.data);
+    } catch (error) {
+      console.error("Error sending OTP:", error);
+      setError(
+        error.response
+          ? error.response.data.message
+          : "Failed to send OTP. Please try again."
+      );
+    }
+    setLoading(false);
   };
 
   const registerUser = async (e) => {
@@ -37,11 +61,16 @@ const Register = () => {
       setError(err.response.data.message);
     }
   };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <section className="register ">
+    <section className="register">
       <div className="container">
         <h2>Sign Up</h2>
-        <form className="form  register__form" onSubmit={registerUser}>
+        <form className="form register__form" onSubmit={registerUser}>
           {error && <p className="form__error-message">{error}</p>}
           <input
             type="text"
@@ -57,28 +86,55 @@ const Register = () => {
             name="email"
             value={userData.email}
             onChange={changeInputHandler}
+            disabled={otpSend}
           />
+
           <input
-            type="password"
-            placeholder="Password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Set a Password"
             name="password"
             value={userData.password}
             onChange={changeInputHandler}
           />
+
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Confirm password"
             name="password2"
             value={userData.password2}
             onChange={changeInputHandler}
           />
-          <button type="submit" className="btn primary">
-            Register
+          <button
+            type="button"
+            className="btn secondary"
+            onClick={togglePasswordVisibility}
+          >
+            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
           </button>
+
+          {!otpSend && !loading && (
+            <button type="button" className="btn primary" onClick={sendOtp}>
+              Send OTP
+            </button>
+          )}
+          {loading && <p>Sending OTP...</p>}
+          {otpSend && (
+            <>
+              <input
+                type="text"
+                name="otp"
+                placeholder="Enter OTP"
+                value={userData.otp}
+                onChange={changeInputHandler}
+              />
+              <button type="submit" className="btn primary">
+                Register
+              </button>
+            </>
+          )}
         </form>
         <small>
-          Allready have an account ?{"  "}
-          <Link to="/login">Sign in</Link>
+          Already have an account? <Link to="/login">Sign in</Link>
         </small>
       </div>
     </section>

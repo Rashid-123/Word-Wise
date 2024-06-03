@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
+import { FaChartLine } from "react-icons/fa";
 import { UserContext } from "../Context/userContext";
 
 const Header = () => {
@@ -90,7 +91,11 @@ const Header = () => {
         <Link to="/" className="nav__logo" onClick={closeNavHandler}>
           <h2 className="wordwise">WordWise</h2>
         </Link>
-        {isAdmin && <Link to={"/admin"}>Dashboard</Link>}
+        {isAdmin && (
+          <Link to={"/admin"}>
+            <FaChartLine style={{}} size={30} color="purple" />
+          </Link>
+        )}
         {currentUser?.id && isNavShowing && (
           <ul className="nav__menu">
             <li>

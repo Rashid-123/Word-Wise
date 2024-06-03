@@ -392,9 +392,9 @@ footer {
 /*---------------- POST DETAILS --------------------*/
 .post-detail__container {
   width: 85%;
-  /* background: var(--color-white); */
+
   background-color: var(--color-dark-primary);
-  /* margin-inline: auto; */
+
   margin-top: 4rem;
   padding: 2rem;
   /* border: 2px solid var(--color--dark-border); */
@@ -410,25 +410,53 @@ footer {
   gap: 1rem;
   align-items: center;
 }
+.post_Detail_title {
+  color: #f9f9f9;
+  font-size: 45px;
+}
 .post-detail__thumbnail {
   margin-top: 1rem;
-  margin-bottom: 1.5rem;
+  margin-top: 3rem;
+  margin-bottom: 4rem;
   height: fit-content;
   overflow: hidden;
+  border-radius: 4px;
 }
 
-.post-detail__container p {
-  margin-bottom: 1rem;
-  font-size: 18px;
+.post-description {
+  font-size: 19px;
+  line-height: 1.6;
+  color: #f9f9f9;
+  font-weight: 400;
+  letter-spacing: 0.7px;
+  margin-bottom: 4rem;
 }
 
-.bookmark {
+.Post_details_footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
-  border: 1px solid var(--color--dark-border);
+  padding: 10px;
+  width: 410px;
+  margin: auto;
+  background-color: #0f172a;
+  border: 1px solid var(--color--dark-border2);
   border-radius: var(--radius-4);
+}
+.like_icon,
+.bookmark_icon {
+  border-right: 1px solid #e3f1ff;
+  padding: 0px 25px;
+}
+.likes_count {
+  display: inline;
+  font-size: 18px;
+
+  font-weight: 300;
+  padding-left: 10px;
+}
+.report_icon {
+  padding: 0px 25px;
 }
 
 /*----------- REGISTER & FORM INPUT--------------- */
@@ -516,6 +544,55 @@ input:focus {
   color: #020617;
   border-color: var(--color--dark-border);
 }
+
+/* /////////////////////////////////////////////////// */
+/* //------------------- USER post ---------------------- */
+
+.user_post_container {
+  width: 900px;
+  margin: 8rem auto 4rem auto;
+}
+.user_posts__container2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+.user_info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem;
+  margin-bottom: 4rem;
+  width: 900px;
+  border: 1px solid var(--color--dark-border);
+}
+.user_info h2 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+.count {
+  margin-right: 8px;
+}
+.user_info p {
+  display: inline;
+  margin-right: 27px;
+  font-weight: 500;
+  color: #f8fafc;
+}
+.user_info img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+}
+.user_info button {
+  padding: 8px 24px;
+  background-color: #2563eb;
+  color: #f8fafc;
+  font-size: 16px;
+  border-radius: var(--radius-4);
+  cursor: pointer;
+}
+
 /*------------------------------- AUTHOR ------------------*/
 
 .authors__container {
@@ -701,9 +778,23 @@ input:focus {
 
 /* ----------------- RESPONSIVE DESIGN ----------------------- */
 
+@media (max-width: 576px) {
+  .post-detail__header {
+    font-size: 0.5rem;
+  }
+  .post-description {
+    font-size: 18px;
+    line-height: 1.6;
+    letter-spacing: 0.6px;
+  }
+}
 @media screen and (max-width: 800px) {
   .posts__container {
     margin-top: 7rem;
+  }
+
+  .bookmark {
+    width: 400px;
   }
 
   h1 {
@@ -774,6 +865,7 @@ input:focus {
     background: transparent;
     padding: 0rem;
     border: none;
+    margin-top: 7rem;
   }
   .register,
   .login,
@@ -839,11 +931,11 @@ input:focus {
   margin-right: 200px;
 }
 
-.admin_navbar li {
+/* .admin_navbar li {
   padding: 5px 18px;
   border-radius: var(--radius-3);
   border: 1px solid var(--color--dark-border2);
-}
+} */
 
 /* /////////////////////////////////////// */
 /* /////----------- Dashboard Home ----------/ */

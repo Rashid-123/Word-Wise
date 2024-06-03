@@ -1,21 +1,32 @@
 import react, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import PostAuthor from "../Component/PostAuthor";
-import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import {
+  FaBookmark,
+  FaRegBookmark,
+  FaClipboard,
+  FaRegClipboard,
+  FaHeart,
+  FaRegHeart,
+} from "react-icons/fa";
+
 import { UserContext } from "../Context/userContext";
 import Loader from "../Component/Loader";
 import axios from "axios";
 import DeletePost from "./DeletePost";
-import { FaRegClipboard } from "react-icons/fa";
+
 const PostDetail = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [creatorID, setCreatorID] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
   //
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isLiked, setIsliked] = useState(false);
   const [isReported, setIsReported] = useState(false);
+  const [totalLikes, setTotalLikes] = useState(null);
   //
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
@@ -37,6 +48,9 @@ const PostDetail = () => {
         if (response.data.reports.includes(id)) {
           setIsReported(true);
         }
+        if (response.data.likes.includes(id)) {
+          setIsliked(true);
+        }
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -54,6 +68,7 @@ const PostDetail = () => {
         );
         setPost(response.data);
         setCreatorID(response.data.creator);
+        setTotalLikes(response.data.total_likes);
       } catch (err) {
         setError(err.message);
       }
@@ -125,87 +140,148 @@ const PostDetail = () => {
       setError("Failed to update bookmark");
     }
   };
+  //
+  const toggleLike = async () => {
+    const postId = id;
+    try {
+      if (isLiked) {
+        // Remove like
+        await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/users/removeLike`,
+          { userId, postId },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setTotalLikes((prev) => prev - 1);
+      } else {
+        // Add bookmark
+        await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/users/addLike`,
+          { userId, postId },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setTotalLikes((prev) => prev + 1);
+      }
+      setIsliked(!isLiked);
+    } catch (error) {
+      console.error("Error toggling bookmark", error);
+      setError("Failed to update bookmark");
+    }
+  };
   if (isLoading) {
     return <Loader />;
   }
   return (
-    <section className="container">
-      {error && <p className="error">{error}</p>}
-      {post && (
-        <div className="container post-detail__container">
-          <div className="post-detail__header">
-            <PostAuthor authorID={post.creator} createdAt={post.createdAt} />
-            {currentUser?.id === post?.creator && (
-              <div className="post-detail__buttons">
-                <Link
-                  to={`/posts/${post?._id}/edit`}
-                  className="btn sm primary"
-                >
-                  Edit
-                </Link>
-                <DeletePost postId={id} />
-              </div>
-            )}
+    <>
+      <div className="container">
+        {error && <p className="error">{error}</p>}
+        {post && (
+          <div className="container post-detail__container">
+            <div className="post-detail__header">
+              <PostAuthor authorID={post.creator} createdAt={post.createdAt} />
+              {currentUser?.id === post?.creator && (
+                <div className="post-detail__buttons">
+                  <Link
+                    to={`/posts/${post?._id}/edit`}
+                    className="btn sm primary"
+                  >
+                    Edit
+                  </Link>
+                  <DeletePost postId={id} />
+                </div>
+              )}
+            </div>
+
+            <h1 className="post_Detail_title">{post.title}</h1>
+            <div className="post-detail__thumbnail">
+              <img src={post.thumbnailURL} alt="" />
+            </div>
+            <p
+              className="post-description"
+              dangerouslySetInnerHTML={{ __html: post.description }}
+            ></p>
+          </div>
+        )}
+      </div>
+      {currentUser?.id && (
+        <div className="Post_details_footer">
+          <div className="like_icon" onClick={toggleLike}>
+            <div>
+              {isLiked ? (
+                <FaHeart
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    color: "#ef4444",
+                    cursor: "pointer",
+                  }}
+                />
+              ) : (
+                <FaRegHeart
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    color: "gray",
+                    cursor: "pointer",
+                  }}
+                />
+              )}
+              <p className="likes_count">{totalLikes}</p>
+            </div>
           </div>
 
-          <h1 className="post_title">{post.title}</h1>
-          <div className="post-detail__thumbnail">
-            <img src={post.thumbnailURL} alt="" />
+          <div className="bookmark_icon" onClick={toggleBookmark}>
+            {isBookmarked ? (
+              <FaBookmark
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  color: "#f8fafc",
+                  cursor: "pointer",
+                }}
+              />
+            ) : (
+              <FaRegBookmark
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  color: "#f8fafc",
+                  cursor: "pointer",
+                }}
+              />
+            )}
           </div>
-          <p dangerouslySetInnerHTML={{ __html: post.description }}></p>
-          {currentUser?.id && (
-            <div className="bookmark">
-              <div onClick={toggleBookmark}>
-                {isBookmarked ? (
-                  <FaBookmark
-                    style={{
-                      width: "25px",
-                      height: "25px",
-                      color: "yellow",
-                      cursor: "pointer",
-                    }}
-                  />
-                ) : (
-                  <FaRegBookmark
-                    style={{
-                      width: "25px",
-                      height: "25px",
-                      color: "grey",
-                      cursor: "pointer",
-                    }}
-                  />
-                )}
-              </div>
-              <div onClick={toggleReport}>
-                {isReported ? (
-                  <FaRegClipboard
-                    style={{
-                      padding: "5px",
-                      // backgroundColor: "red",
-                      borderRadius: "25%",
-                      cursor: "pointer",
-                    }}
-                    size={34}
-                    color="red"
-                  />
-                ) : (
-                  <FaRegClipboard
-                    style={{
-                      padding: "5px",
-                      // backgroundColor: "white",
-                      borderRadius: "25%",
-                      cursor: "Pointer",
-                    }}
-                    size={34}
-                    color="white"
-                  />
-                )}
-              </div>
-            </div>
-          )}
+          <div className="report_icon" onClick={toggleReport}>
+            {isReported ? (
+              <FaClipboard
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  color: "red",
+                  cursor: "pointer",
+                }}
+              />
+            ) : (
+              <FaRegClipboard
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  color: "#f8fafc",
+                  cursor: "pointer",
+                }}
+              />
+            )}
+          </div>
         </div>
       )}
-    </section>
+    </>
   );
 };
 

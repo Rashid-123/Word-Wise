@@ -99,7 +99,7 @@ const AdminHome = () => {
             />
             <h3>Total Users </h3>
           </div>
-          <h2>{totalUsers}</h2>
+          <h2 style={{ color: "blue" }}>{totalUsers}</h2>
         </div>
         <div className="dashboard_box">
           <div>
@@ -114,7 +114,7 @@ const AdminHome = () => {
             />
             <h3> Total posts </h3>
           </div>
-          <h2>{totalPosts}</h2>
+          <h2 style={{ color: "green" }}>{totalPosts}</h2>
         </div>
         <div className="dashboard_box">
           <div>
@@ -129,7 +129,7 @@ const AdminHome = () => {
             />
             <h3>Users with Posts</h3>
           </div>
-          <h2>{UsersWithPost}</h2>
+          <h2 style={{ color: "purple" }}>{UsersWithPost}</h2>
         </div>
 
         <div className="dashboard_box">
@@ -145,7 +145,7 @@ const AdminHome = () => {
             />
             <h3> Reports </h3>
           </div>
-          <h2>{totalReports}</h2>
+          <h2 style={{ color: "red" }}> {totalReports}</h2>
         </div>
       </div>
     </section>
