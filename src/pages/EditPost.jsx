@@ -8,6 +8,7 @@ const EditPost = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Uncategorized");
   const [description, setDescription] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -71,6 +72,7 @@ const EditPost = () => {
         );
         const postData = response.data; // Assuming the response is an object with title, description, etc.
         setTitle(postData.title);
+        setShortDescription(postData.shortDescription);
         setCategory(postData.category);
         setDescription(postData.description);
         // Assuming thumbnail is stored in postData.thumbnail
@@ -87,6 +89,7 @@ const EditPost = () => {
     e.preventDefault();
     const postData = new FormData();
     postData.append("title", title);
+    postData.append("shortDescription", shortDescription);
     postData.append("category", category);
     postData.append("description", description);
     if (thumbnail) {
@@ -119,6 +122,14 @@ const EditPost = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             autoFocus
+          />{" "}
+          <textarea
+            placeholder="Short Description"
+            value={shortDescription}
+            onChange={(e) => setShortDescription(e.target.value)}
+            rows="3"
+            style={{ resize: "vertical" }}
+            // autoFocus
           />
           <select
             name="category"
@@ -130,7 +141,9 @@ const EditPost = () => {
             ))}
           </select>
           <ReactQuill
-            // theme="snow"
+            className="custom-editor"
+            theme="snow"
+            style={{ height: "400px" }}
             modules={modules}
             formats={formats}
             value={description}
@@ -138,6 +151,7 @@ const EditPost = () => {
           />
           <input
             type="file"
+            style={{ marginTop: "40px" }}
             onChange={(e) => setThumbnail(e.target.files[0])}
             accept="png , jpg , jpeg"
           />

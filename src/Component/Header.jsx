@@ -129,7 +129,7 @@ const Header = () => {
               <Link className="anchor" to="/logout" onClick={closeNavHandler}>
                 Logout
               </Link>
-            </li>
+            </li>{" "}
           </ul>
         )}
 

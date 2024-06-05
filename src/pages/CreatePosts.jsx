@@ -1,9 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-// import "react-quill/dist/quill.bubble.css";
-// import "react-quill/dist/quill.core.css";
-
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/userContext";
 import axios from "axios";
@@ -12,6 +9,7 @@ const CreatePosts = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Uncategorized");
   const [description, setDescription] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const [error, setError] = useState("");
 
@@ -69,8 +67,10 @@ const CreatePosts = () => {
 
     const postData = new FormData();
     postData.append("title", title);
+    postData.append("shortDescription", shortDescription);
     postData.append("category", category);
     postData.append("description", description);
+
     if (thumbnail) {
       postData.append("thumbnail", thumbnail);
     }
@@ -101,6 +101,14 @@ const CreatePosts = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             autoFocus
+          />{" "}
+          <textarea
+            placeholder="Short Description"
+            value={shortDescription}
+            onChange={(e) => setShortDescription(e.target.value)}
+            rows="3"
+            style={{ resize: "vertical" }}
+            // autoFocus
           />
           <select
             name="category"
@@ -116,6 +124,7 @@ const CreatePosts = () => {
           <ReactQuill
             className="custom-editor"
             theme="snow"
+            style={{ height: "400px" }}
             modules={modules}
             formats={formats}
             value={description}
@@ -123,6 +132,7 @@ const CreatePosts = () => {
           />
           <input
             type="file"
+            style={{ marginTop: "70px" }}
             onChange={(e) => setThumbnail(e.target.files[0])}
             accept=".png, .jpg, .jpeg"
           />

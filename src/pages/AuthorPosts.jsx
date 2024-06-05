@@ -1,45 +1,53 @@
+import Loader from "../Component/Loader";
 import React, { useState, useEffect, useContext } from "react";
 import PostItem from "../Component/PostItem";
 import axios from "axios";
-import Loader from "../Component/Loader";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../Context/userContext";
 
 const AuthorPosts = () => {
   const [posts, setPosts] = useState(null);
-  const [user, setUser] = useState(null);
+  const [user2, setUser2] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  //
+
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
   const navigate = useNavigate();
   const userId = currentUser?.id;
-  //
+
   const { id } = useParams();
 
-  const toggleFollow = async () => {
-    if (!token) {
-      navigate("/login");
-    }
-
+  const fetchUserData = async (userId) => {
     try {
-      const endpoint = isFollowing ? "unfollow" : "follow";
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/users/${endpoint}`,
-        { user1: currentUser.id, user2: id },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/users/${userId}`
       );
-      setIsFollowing(!isFollowing);
+      return response.data;
     } catch (error) {
       console.log(error);
+      return null;
     }
   };
+
+  useEffect(() => {
+    const fetchUsersData = async () => {
+      setIsLoading(true);
+      const currentUserData = await fetchUserData(currentUser?.id);
+      const otherUserData = await fetchUserData(id);
+
+      if (currentUserData) {
+        setIsFollowing(currentUserData.following.includes(id));
+      }
+      if (otherUserData) {
+        setUser2(otherUserData);
+        setIsFollowing(otherUserData.followers.includes(userId));
+      }
+      setIsLoading(false);
+    };
+
+    fetchUsersData();
+  }, [currentUser?.id, id, userId]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -48,58 +56,76 @@ const AuthorPosts = () => {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/posts/users/${id}`
         );
-        setPosts(response?.data);
+        setPosts(response.data);
       } catch (err) {
         console.log(err);
       }
       setIsLoading(false);
     };
     fetchPosts();
-  }, []);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/users/${id}`
-        );
-        setUser(response?.data);
-      } catch (err) {
-        console.log(err);
-      }
-      setIsLoading(false);
-    };
-    fetchUser();
   }, [id]);
 
-  // console.log(random);
+  const toggleFollow = async () => {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const endpoint = isFollowing ? "unfollow" : "follow";
+      await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/users/${endpoint}`,
+        { user1: currentUser?.id, user2: id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setIsFollowing(!isFollowing);
+
+      setUser2((prevUser2) => ({
+        ...prevUser2,
+        followers: isFollowing
+          ? prevUser2.followers.filter((followerId) => followerId !== userId)
+          : [...prevUser2.followers, userId],
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (isLoading) {
     return <Loader />;
   }
 
-  // const filteredPosts = posts.filter((post) => post.creator === id);
   return (
     <section className="user_post_container">
       <div className="user_info">
-        <img src={user?.avatarURL} alt="" />
-        <div className="">
-          <h2>{user?.name}</h2>
+        <img src={user2?.avatarURL} alt="" />
+        <div>
+          <h2>{user2?.name}</h2>
           <p>
-            <span className="count">{user?.followers.length}</span>followers
+            <span className="count">{user2?.followers.length}</span> followers
           </p>
           <p>
-            <span className="count">{user?.following.length}</span>following
+            <span className="count">{user2?.following.length}</span> following
           </p>
         </div>
-        <div onClick={toggleFollow}>
-          {isFollowing ? <button>following</button> : <button>follow</button>}
+        <div className="follow">
+          <div onClick={toggleFollow}>
+            {currentUser?.id !== id &&
+              (isFollowing ? (
+                <button className="follow_button">Following</button>
+              ) : (
+                <button className="follow_button">Follow</button>
+              ))}
+          </div>
         </div>
       </div>
       {posts?.length > 0 ? (
         <div className="user_posts__container2">
-          {posts?.map(
+          {posts.map(
             ({
               _id: id,
               title,

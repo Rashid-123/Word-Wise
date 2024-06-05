@@ -17,7 +17,26 @@ const AdminHome = () => {
   const [totalReports, setTotalReports] = useState(null);
   const [UsersWithPost, setUsersWithPost] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [featuredPost, setFeaturedPost] = useState(null);
   //
+  useEffect(() => {
+    const fetchFeaturedPost = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/posts/getfeatured`
+        );
+        console.log(response.data);
+        setFeaturedPost(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+      setIsLoading(false);
+    };
+    fetchFeaturedPost();
+  }, []);
+  //
+
   useEffect(() => {
     const fetchReports = async () => {
       setIsLoading(true);
@@ -147,6 +166,12 @@ const AdminHome = () => {
           </div>
           <h2 style={{ color: "red" }}> {totalReports}</h2>
         </div>
+      </div>
+      <h2 className="dash_featured_tag">Featured Post</h2>
+      <div className="home_featured">
+        <img src={featuredPost?.thumbnailURL} alt="" />
+        <h2>{featuredPost?.title}</h2>
+        <button>view</button>
       </div>
     </section>
   );

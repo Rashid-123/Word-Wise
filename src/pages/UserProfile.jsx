@@ -13,7 +13,7 @@ const UserProfile = () => {
   const [newPassword, setnewPassword] = useState("");
   const [confirmNewPassword, setconfirmNewPassword] = useState("");
   const [isAvatarTouched, setIsAvatarTouched] = useState(false);
-
+  const [user, setUser] = useState(null);
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
   const navigate = useNavigate();
@@ -34,6 +34,7 @@ const UserProfile = () => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
+        setUser(response.data);
         const { name, email, avatarURL } = response.data;
         setName(name);
         setemail(email);
@@ -90,25 +91,15 @@ const UserProfile = () => {
       setError(error.response.data.message);
     }
   };
-
   return (
     <section className="profile">
       <div className="container profile__container">
-        <div>
-          <Link to={`/myposts/${currentUser.id}`} className="my__post">
-            My posts
-          </Link>
-          <Link to={`/bookmark/${currentUser.id}`} className="my__post">
-            Bookmarked Posts
-          </Link>
-        </div>
-
-        <div className="profile__details">
+        <div className="profile_details_container">
           <div className="avatar__wrapper">
             <div className="profile__avatar">
               <img src={avatar} alt="" />
             </div>
-            {/* Form to update avatar */}
+
             <form className="avatar__form">
               <input
                 type="file"
@@ -130,8 +121,24 @@ const UserProfile = () => {
               </button>
             )}
           </div>
-          <h1>{currentUser.name}</h1>
+          <div>
+            <h1>{currentUser.name}</h1>
+            <p>
+              <span className="count">{user?.followers?.length}</span>
+              followers
+            </p>
+            <p>
+              <span className="count">{user?.following?.length}</span>
+              following
+            </p>
+          </div>
 
+          <div className="">
+            <Link to={`/myposts/${currentUser.id}`}>My posts</Link>
+            <Link to={`/bookmark/${currentUser.id}`}>Bookmarked Posts</Link>
+          </div>
+        </div>
+        <div className="profile__details">
           <form className="form profile__form" onSubmit={updateUserDetails}>
             {error && <p className="form__error-message">{error}</p>}
             <input
