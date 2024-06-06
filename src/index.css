@@ -43,6 +43,7 @@ body {
   font-family: "Roboto", sans-serif;
   /* background-color: var(--color-bg); */
   background-color: var(--color-dark-primary);
+
   font-size: 1rem;
   line-height: 1.6;
   /* color: var(--color-gray-700); */
@@ -399,9 +400,9 @@ footer {
 .post {
   /* background: var(--color-white); */
   background-color: var(--color-dark-primary);
-  padding: 1rem 1rem 0.7rem 1rem;
+  padding: 1rem 1rem 1.4rem 1rem;
   border-radius: var(--radius-4);
-  padding-bottom: 2rem;
+
   transition: var(--transition);
   cursor: default;
   border: 0.09rem solid var(--color--dark-border);
@@ -409,7 +410,7 @@ footer {
 }
 
 .post:hover {
-  box-shadow: 0.03rem 0.04rem 0.7rem var(--color--dark-border);
+  box-shadow: 0.02rem 0.03rem 0.5rem var(--color--dark-border);
   border-color: #434a68;
   /* cursor: pointer; */
 }
@@ -707,33 +708,23 @@ textarea:focus {
 }
 
 /*---------------- USER PROFILE ---------------------------*/
-
-.profile__container {
+.profile_details_container {
   display: grid;
   place-items: center;
   text-align: center;
 }
-.profile_details_container {
-  width: 800px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
 .profile_details_container p {
   display: inline;
+  margin-top: 3rem;
 }
-
 .my__post:hover {
   border-color: var(--color--dark-border);
 }
-.profile__details {
-  width: 100%;
-}
+
 .avatar__wrapper {
   width: 15rem;
   aspect-ratio: 1/1;
   position: relative;
-  margin-inline: auto;
   margin-top: 1rem;
 }
 .profile__avatar {
@@ -768,9 +759,30 @@ textarea:focus {
   font-size: 1.5rem;
   background: #2563eb;
 }
-
-.profile__details h1 {
-  margin-top: 1.5rem;
+.edit_lable {
+  color: #629beb;
+  margin: 1rem;
+}
+.profile_name {
+  margin: 0.7rem 0 0.5rem 0;
+}
+.count {
+  margin-left: 1rem;
+  color: rgb(255, 255, 255);
+}
+.bookmark_box {
+  margin-top: 2rem;
+}
+.bookmark_link {
+  padding: 7px 10px;
+  background-color: var(--color-gray-700);
+  border: 1px solid var(--color--dark-border);
+  border-radius: var(--radius-2);
+  margin-left: 10px;
+  transform: var(--transition);
+}
+.bookmark_link:hover {
+  border: 1px solid var(--color--dark-border2);
 }
 .form.profile__form {
   margin-top: 3rem;

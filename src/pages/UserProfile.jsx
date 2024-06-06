@@ -95,11 +95,11 @@ const UserProfile = () => {
     <section className="profile">
       <div className="container profile__container">
         <div className="profile_details_container">
+          <h1 className="edit_lable">Edit Profile</h1>
           <div className="avatar__wrapper">
             <div className="profile__avatar">
               <img src={avatar} alt="" />
             </div>
-
             <form className="avatar__form">
               <input
                 type="file"
@@ -122,7 +122,7 @@ const UserProfile = () => {
             )}
           </div>
           <div>
-            <h1>{currentUser.name}</h1>
+            <h1 className="profile_name">{currentUser.name}</h1>
             <p>
               <span className="count">{user?.followers?.length}</span>
               followers
@@ -133,49 +133,52 @@ const UserProfile = () => {
             </p>
           </div>
 
-          <div className="">
-            <Link to={`/myposts/${currentUser.id}`}>My posts</Link>
-            <Link to={`/bookmark/${currentUser.id}`}>Bookmarked Posts</Link>
+          <div className="bookmark_box">
+            <Link className="bookmark_link" to={`/myposts/${currentUser.id}`}>
+              Posts
+            </Link>
+            <Link className="bookmark_link" to={`/bookmark/${currentUser.id}`}>
+              Bookmarks
+            </Link>
           </div>
         </div>
-        <div className="profile__details">
-          <form className="form profile__form" onSubmit={updateUserDetails}>
-            {error && <p className="form__error-message">{error}</p>}
-            <input
-              type="text"
-              placeholder="Full Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setemail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Current Password"
-              value={currentPassword}
-              onChange={(e) => setcurrentPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="New Password"
-              value={newPassword}
-              onChange={(e) => setnewPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Confirm new password"
-              value={confirmNewPassword}
-              onChange={(e) => setconfirmNewPassword(e.target.value)}
-            />
-            <button type="submit" className="btn primary">
-              Update details
-            </button>
-          </form>
-        </div>
+
+        <form className="form profile__form" onSubmit={updateUserDetails}>
+          {error && <p className="form__error-message">{error}</p>}
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setemail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Current Password"
+            value={currentPassword}
+            onChange={(e) => setcurrentPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="New Password"
+            value={newPassword}
+            onChange={(e) => setnewPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Confirm new password"
+            value={confirmNewPassword}
+            onChange={(e) => setconfirmNewPassword(e.target.value)}
+          />
+          <button type="submit" className="btn primary">
+            Update details
+          </button>
+        </form>
       </div>
     </section>
   );
