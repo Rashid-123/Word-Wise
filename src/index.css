@@ -425,7 +425,11 @@ footer {
   border-radius: var(--radius-2);
   overflow: hidden;
 }
-
+@media (max-width: 800px) {
+  .post {
+    padding: 1.4rem 1.4rem 2rem 1.4rem;
+  }
+}
 /*---------------- POST DETAILS --------------------*/
 .post-detail__container {
   width: 85%;
