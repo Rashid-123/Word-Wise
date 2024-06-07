@@ -700,6 +700,7 @@ textarea:focus {
   }
   .user_posts__container2 {
     grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
   }
   .user_info h2 {
     margin: 15px 0 2px 0;
