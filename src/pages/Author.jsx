@@ -36,10 +36,9 @@ const Author = () => {
                 <div className="author__avatar">
                   <img src={avatarURL} alt={name} />
                 </div>
-                {/* <div className="author__info"> */}
+
                 <h4>{name}</h4>
                 <p>{posts}</p>
-                {/* </div> */}
               </Link>
             );
           })}

@@ -458,9 +458,7 @@ footer {
 /*---------------- POST DETAILS --------------------*/
 .post-detail__container {
   width: 85%;
-
   background-color: var(--color-dark-primary);
-
   margin-top: 4rem;
   padding: 2rem;
   /* border: 2px solid var(--color--dark-border); */
@@ -617,6 +615,7 @@ textarea:focus {
 /* //------------------- USER post ---------------------- */
 
 .user_post_container {
+  width: 85%;
   max-width: 900px;
   margin: 8rem auto 4rem auto;
 }
@@ -644,14 +643,15 @@ textarea:focus {
 }
 .user_info p {
   display: inline;
-  margin-right: 27px;
-  font-weight: 500;
+
+  font-weight: 400;
   color: #f8fafc;
 }
 .user_info img {
   width: 140px;
   height: 140px;
   border-radius: 50%;
+  border: 3px solid var(--color--dark-border2);
 }
 .user_info button {
   padding: 8px 24px;
@@ -661,20 +661,65 @@ textarea:focus {
   border-radius: var(--radius-4);
   cursor: pointer;
 }
-
-.follow {
-  display: flex;
-  width: 80px;
-  justify-content: center;
-}
 .follow_button:hover {
   cursor: pointer;
   background-color: #252542;
 }
 .follow_button:active {
-  background-color: #434a68;
+  color: #2563eb;
 }
 
+@media screen and (max-width: 900px) {
+  .user_posts__container2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+  }
+  .user_info h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+  }
+
+  .user_info p {
+    font-weight: 400;
+  }
+  .user_info img {
+    width: 110px;
+    height: 110px;
+  }
+  .user_info button {
+    padding: 7px 20px;
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .user_info {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    border: 1px solid var(--color--dark-border);
+  }
+  .user_posts__container2 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .user_info h2 {
+    margin: 15px 0 2px 0;
+
+    font-size: 30px;
+  }
+
+  .user_info p {
+    font-weight: 400;
+  }
+  .user_info img {
+    width: 110px;
+    height: 110px;
+  }
+  .user_info button {
+    padding: 7px 20px;
+    font-size: 14px;
+    margin-top: 20px;
+  }
+}
 /*------------------------------- AUTHOR ------------------*/
 
 .authors__container {
@@ -874,8 +919,8 @@ textarea:focus {
 /* ----------------- RESPONSIVE DESIGN ----------------------- */
 
 @media (max-width: 576px) {
-  .post-detail__header {
-    font-size: 0.5rem;
+  .post_Detail_title {
+    /* font-size: 34px; */
   }
   .post-description {
     font-size: 18px;
