@@ -862,6 +862,12 @@ textarea:focus {
   font-size: 16px;
   font-weight: 400;
 }
+
+@media (max-width: 576px) {
+  .dashboard__post {
+    flex-direction: column;
+  }
+}
 /* ================ LOADER ================== */
 /* .loader {
   position: fixed;
