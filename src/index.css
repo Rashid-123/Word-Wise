@@ -393,7 +393,7 @@ footer {
 .posts__container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 4rem;
+  gap: 3rem;
   margin-top: 2.3rem;
 }
 
@@ -617,7 +617,7 @@ textarea:focus {
 /* //------------------- USER post ---------------------- */
 
 .user_post_container {
-  width: 900px;
+  max-width: 900px;
   margin: 8rem auto 4rem auto;
 }
 .user_posts__container2 {
@@ -626,12 +626,13 @@ textarea:focus {
   gap: 3rem;
 }
 .user_info {
-  display: flex;
+  display: grid;
+  grid-template-columns: 22% auto 22%;
+  justify-items: center;
   align-items: center;
-  justify-content: space-between;
   padding: 3rem;
   margin-bottom: 4rem;
-  width: 900px;
+  /* width: 900px; */
   border: 1px solid var(--color--dark-border);
 }
 .user_info h2 {
@@ -1147,3 +1148,5 @@ textarea:focus {
   border-radius: var(--radius-2);
   margin-right: 30px;
 }
+/* // */
+/* Global styles */
