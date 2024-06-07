@@ -18,9 +18,12 @@ const PostItem = ({
 
   return (
     <article className="post">
-      <div className="post__thumbnail">
-        <img src={thumbnail} alt={title}></img>
-      </div>
+      <Link to={`/posts/${postID}`}>
+        <div className="post__thumbnail">
+          <img src={thumbnail} alt={title}></img>
+        </div>
+      </Link>
+
       <div className="post__content">
         <Link to={`/posts/${postID}`}>
           <h3 className="multiline">{postTitle}</h3>

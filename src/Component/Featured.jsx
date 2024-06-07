@@ -27,34 +27,38 @@ const Featured = ({ post }) => {
 
   return (
     <article className="featured__post">
-      <div className="featured__1">
-        <p className="featured__label">FEATURED</p>
-        <div className="featured__content">
-          <Link to={`posts/${post?._id}`}>
-            <h1 className="featured_title">{post?.title}</h1>
-          </Link>
-          <p className="featured__description">
-            {truncateText(post?.shortDescription, 350)}
-          </p>
-        </div>
-        <div className="post__footer">
-          <PostAuthor authorID={post?.creator} createdAt={post.createdAt} />
-          <Link
-            to={`/posts/categories/${post?.category}`}
-            className="btn category"
-          >
-            {post?.category}
-          </Link>
-        </div>
-      </div>
-      <div className="image_box">
+      <Link className="star" to={`posts/${post?._id}`}>
+        <p className="featured__label">
+          <span className="featured_icon">★</span>FEATURED
+        </p>
+      </Link>
+      <Link to={`posts/${post?._id}`}>
+        <h1 className="featured_title">{post?.title}</h1>
+      </Link>{" "}
+      <Link className="image_box">
         <div className={`featured__image ${imageLoaded ? "loaded" : ""}`}>
           {imageLoaded ? (
-            <img src={post?.thumbnailURL} alt="Featured Post Thumbnail" />
+            <Link to={`posts/${post?._id}`}>
+              <img src={post?.thumbnailURL} alt="Featured Post Thumbnail" />
+            </Link>
           ) : (
             <div className="image-placeholder"></div>
           )}
         </div>
+      </Link>
+      <Link to={`posts/${post?._id}`}>
+        <p className="featured__description">
+          {truncateText(post?.shortDescription, 350)}
+        </p>
+      </Link>
+      <div className="post__footer">
+        <PostAuthor authorID={post?.creator} createdAt={post.createdAt} />
+        <Link
+          to={`/posts/categories/${post?.category}`}
+          className="btn category"
+        >
+          {post?.category}
+        </Link>
       </div>
     </article>
   );

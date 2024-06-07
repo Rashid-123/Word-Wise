@@ -1,5 +1,5 @@
 import react, { useState, useContext, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, navigate, useNavigate, useParams } from "react-router-dom";
 import PostAuthor from "../Component/PostAuthor";
 import {
   FaBookmark,
@@ -31,7 +31,8 @@ const PostDetail = () => {
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
   const userId = currentUser?.id;
-
+  //
+  const navigate = useNavigate();
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -78,6 +79,10 @@ const PostDetail = () => {
   }, []);
   //
   const toggleReport = async () => {
+    if (!currentUser?.id) {
+      navigate("/login");
+      return;
+    }
     const postId = id;
     try {
       if (isReported) {
@@ -109,6 +114,10 @@ const PostDetail = () => {
   };
   //
   const toggleBookmark = async () => {
+    if (!currentUser?.id) {
+      navigate("/login");
+      return;
+    }
     const postId = id;
     try {
       if (isBookmarked) {
@@ -142,6 +151,10 @@ const PostDetail = () => {
   };
   //
   const toggleLike = async () => {
+    if (!currentUser?.id) {
+      navigate("/login");
+      return;
+    }
     const postId = id;
     try {
       if (isLiked) {
@@ -210,7 +223,7 @@ const PostDetail = () => {
           </div>
         )}
       </div>
-      {currentUser?.id && (
+      {
         <div className="Post_details_footer">
           <div className="like_icon" onClick={toggleLike}>
             <div>
@@ -280,7 +293,7 @@ const PostDetail = () => {
             )}
           </div>
         </div>
-      )}
+      }
     </>
   );
 };
