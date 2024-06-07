@@ -523,6 +523,13 @@ footer {
   padding: 0px 25px;
 }
 
+@media screen and (max-width: 650px) {
+  .Post_details_footer {
+    padding: 7px;
+    width: 300px;
+  }
+}
+
 /*----------- REGISTER & FORM INPUT--------------- */
 .create-post {
   min-height: 750px;
