@@ -324,17 +324,22 @@ footer {
 }
 
 .image_box {
-  width: 390px;
-  height: 270px;
+  max-width: 390px;
+  max-height: 270px;
   grid-column: 2 / span 2;
   grid-row: 1 / span 4;
-  justify-items: center;
+  /* justify-items: center; */
   margin-left: 2.6rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .image_box img {
   width: 100%;
   height: 100%;
   border-radius: var(--radius-3);
+  /* margin: auto; */
 }
 
 .image-placeholder {
@@ -346,7 +351,6 @@ footer {
 .featured_title {
   margin-bottom: 15px;
 }
-
 .featured__description {
   letter-spacing: 0.5px;
   font-size: 16px;
@@ -375,6 +379,7 @@ footer {
     grid-template-columns: repeat(1, 1fr);
     padding: 2rem;
   }
+
   .image_box {
     width: auto;
     height: auto;
