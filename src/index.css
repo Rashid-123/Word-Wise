@@ -161,6 +161,11 @@ nav {
   border-bottom: 2px solid var(--color--dark-border);
   backdrop-filter: blur(20px);
 }
+.W {
+  color: #2563eb;
+  font-weight: 900;
+  font-size: 35px;
+}
 .nav__container {
   display: flex;
   justify-content: space-between;

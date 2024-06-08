@@ -14,7 +14,7 @@ const PostItem = ({
     description.length > 90
       ? description.substr(0, 90) + " . . ."
       : description;
-  const postTitle = title.length > 30 ? title.substr(0, 30) + " . . ." : title;
+  const postTitle = title.length > 46 ? title.substr(0, 45) + " . . ." : title;
 
   return (
     <article className="post">

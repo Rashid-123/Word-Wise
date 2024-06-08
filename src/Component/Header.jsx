@@ -75,21 +75,13 @@ const Header = () => {
     }
   }, [location.pathname]);
 
-  // Reset active buttons when returning to home route
-  // useEffect(() => {
-  //   if (location.pathname === "/") {
-  //     setIsCreateActive(false);
-  //     setIsProfileActive(false);
-  //     setIsAuthorActive(false);
-  //     setIsLoginActive(false);
-  //   }
-  // }, [location.pathname]);
-
   return (
     <nav>
       <div className="container nav__container">
         <Link to="/" className="nav__logo" onClick={closeNavHandler}>
-          <h2 className="wordwise">WordWise</h2>
+          <h2 className="wordwise">
+            <span className="W">W</span>ord<span className="W">W</span>ise
+          </h2>
         </Link>
         {isAdmin && (
           <Link to={"/admin"}>
