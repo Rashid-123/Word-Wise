@@ -239,11 +239,35 @@ footer {
   padding-top: 6rem;
 }
 .footer__categories {
-  display: flex;
+  display: grid;
+  width: 70%;
+  margin: auto auto;
   align-items: center;
-  justify-content: center;
+  justify-items: center;
+  grid-template-columns: repeat(9, 1fr);
   gap: 1.5rem;
   margin-bottom: 4rem;
+}
+@media (max-width: 1300px) {
+  .footer__categories {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+@media (max-width: 1000px) {
+  .footer__categories {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media (max-width: 800px) {
+  .footer__categories {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .footer__categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .footer__categories a {
