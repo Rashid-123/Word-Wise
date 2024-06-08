@@ -97,7 +97,8 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [featuredPost, setFeaturedPost] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [visiblePosts, setVisiblePosts] = useState(8); // Number of posts initially visible
+  const [visiblePosts, setVisiblePosts] = useState(null); // Number of posts initially visible
+  const [postsToShow, setPostsToShow] = useState(null); // Posts to show based on window size
 
   useEffect(() => {
     const fetchFeaturedPost = async () => {
@@ -133,8 +134,31 @@ const Posts = () => {
     fetchPosts();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 900) {
+        setVisiblePosts(6);
+        setPostsToShow(6);
+      } else {
+        setVisiblePosts(8);
+        setPostsToShow(8);
+      }
+    };
+
+    // Set initial value based on window size
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const handleShowMore = () => {
-    setVisiblePosts((prevVisiblePosts) => prevVisiblePosts + 8);
+    setVisiblePosts((prevVisiblePosts) => prevVisiblePosts + postsToShow);
   };
 
   if (isLoading) {
