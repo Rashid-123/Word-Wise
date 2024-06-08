@@ -430,6 +430,26 @@ footer {
   border-radius: var(--radius-2);
   overflow: hidden;
 }
+.show-more-button {
+  background-color: #007bff;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 7px 15px;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s;
+}
+
+.show-more-button:hover {
+  background-color: #0056b3;
+}
+
 @media (max-width: 800px) {
   .post {
     padding: 1.4rem 1.4rem 2rem 1.4rem;
