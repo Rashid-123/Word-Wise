@@ -148,13 +148,13 @@ const Posts = () => {
     // Set initial value based on window size
     handleResize();
 
-    // Add event listener
-    window.addEventListener("resize", handleResize);
+    // // Add event listener
+    // window.addEventListener("resize", handleResize);
 
-    // Clean up event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    // // Clean up event listener on component unmount
+    // return () => {
+    //   window.removeEventListener("resize", handleResize);
+    // };
   }, []);
 
   const handleShowMore = () => {
