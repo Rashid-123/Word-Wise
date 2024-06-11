@@ -240,7 +240,7 @@ footer {
 }
 .footer__categories {
   display: grid;
-  width: 70%;
+  width: 80%;
   margin: auto auto;
   align-items: center;
   justify-items: center;
@@ -250,14 +250,14 @@ footer {
 }
 @media (max-width: 1300px) {
   .footer__categories {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
   .footer__categories {
     grid-template-columns: repeat(5, 1fr);
   }
-}
+} */
 @media (max-width: 800px) {
   .footer__categories {
     grid-template-columns: repeat(3, 1fr);
