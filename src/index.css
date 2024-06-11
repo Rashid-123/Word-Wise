@@ -433,7 +433,7 @@ footer {
   font-size: 21px;
   font-weight: 500;
 }
-.post:hover h3.multiline {
+.multiline:hover {
   cursor: pointer;
 }
 .post__content p {
@@ -1234,3 +1234,6 @@ textarea:focus {
 }
 /* // */
 /* Global styles */
+.multiline {
+  font-size: 33px;
+}

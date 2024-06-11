@@ -25,7 +25,7 @@ const DeletePost = ({ postId: id }) => {
         { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200) {
-        if (location.pathname == `/myposts/${currentUser.id}`) {
+        if (location.pathname === `/myposts/${currentUser.id}`) {
           navigate(0);
         } else {
           navigate("/");
