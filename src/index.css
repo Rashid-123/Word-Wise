@@ -927,19 +927,21 @@ textarea:focus {
   }
 }
 /* ================ LOADER ================== */
-/* .loader {
-  position: fixed;
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  position: fixed; /* Fixed position to stay centered during scrolling */
   top: 0;
   left: 0;
-  height: 100vh;
-  width: 100vw;
-  display: grid;
-  place-items: center;
-} */
+  z-index: 9999; /* Ensure it's on top of other elements */
+}
 
-.loader__image {
-  width: 4.5rem;
-  /* aspect-ratio: 1/1; */
+.loader__image img {
+  width: 60px; /* Adjust the size of the loading gif as needed */
+  height: 60px; /* Adjust the size of the loading gif as needed */
 }
 
 /* ================ CATEGORY ================== */
