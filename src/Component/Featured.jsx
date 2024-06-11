@@ -34,17 +34,9 @@ const Featured = ({ post }) => {
       </Link>
       <Link to={`posts/${post?._id}`}>
         <h1 className="featured_title">{post?.title}</h1>
-      </Link>{" "}
-      <Link className="image_box">
-        <div className={`featured__image ${imageLoaded ? "loaded" : ""}`}>
-          {imageLoaded ? (
-            <Link to={`posts/${post?._id}`}>
-              <img src={post?.thumbnailURL} alt="Featured Post Thumbnail" />
-            </Link>
-          ) : (
-            <div className="image-placeholder"></div>
-          )}
-        </div>
+      </Link>
+      <Link to={`posts/${post?._id}`} className="image_box">
+        <img src={post?.thumbnailURL} alt="Featured Post Thumbnail" />
       </Link>
       <Link to={`posts/${post?._id}`}>
         <p className="featured__description">
