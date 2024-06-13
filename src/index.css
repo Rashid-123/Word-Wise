@@ -485,7 +485,7 @@ footer {
 .post-detail__container {
   width: 85%;
   background-color: var(--color-dark-primary);
-  margin-top: 4rem;
+  margin-top: 6rem;
   padding: 2rem;
   /* border: 2px solid var(--color--dark-border); */
 }
@@ -500,9 +500,18 @@ footer {
   gap: 1rem;
   align-items: center;
 }
+.title_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center; /* Center text horizontally */
+}
 .post_Detail_title {
   color: #f9f9f9;
   font-size: 45px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .post-detail__thumbnail {
   margin-top: 1rem;
@@ -693,6 +702,12 @@ textarea:focus {
   font-size: 16px;
   border-radius: var(--radius-4);
   cursor: pointer;
+}
+.name_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .follow_button:hover {
   cursor: pointer;
@@ -929,10 +944,6 @@ textarea:focus {
   justify-content: center;
   align-items: center;
   height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
-  position: fixed; /* Fixed position to stay centered during scrolling */
-  top: 0;
-  left: 0;
   z-index: 9999; /* Ensure it's on top of other elements */
 }
 

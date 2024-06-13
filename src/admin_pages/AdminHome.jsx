@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GoContainer } from "react-icons/go";
+import { Link } from "react-router-dom";
 import {
   FaUsers,
   FaRegClipboard,
@@ -171,7 +172,9 @@ const AdminHome = () => {
       <div className="home_featured">
         <img src={featuredPost?.thumbnailURL} alt="" />
         <h2>{featuredPost?.title}</h2>
-        <button>view</button>
+        <Link to={`/admin/featured/${featuredPost?._id}`}>
+          <button className="btn pr">view</button>
+        </Link>
       </div>
     </section>
   );

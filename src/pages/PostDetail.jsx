@@ -211,8 +211,10 @@ const PostDetail = () => {
                 </div>
               )}
             </div>
+            <div className="title_container">
+              <h1 className="post_Detail_title">{post.title}</h1>
+            </div>
 
-            <h1 className="post_Detail_title">{post.title}</h1>
             <div className="post-detail__thumbnail">
               <img src={post.thumbnailURL} alt="" />
             </div>

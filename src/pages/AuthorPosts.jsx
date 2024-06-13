@@ -103,14 +103,16 @@ const AuthorPosts = () => {
     <section className="user_post_container">
       <div className="user_info">
         <img src={user2?.avatarURL} alt="" />
-        <div>
+        <div className="name_box">
           <h2>{user2?.name}</h2>
-          <p>
-            <span className="count">{user2?.followers.length}</span> followers
-          </p>
-          <p>
-            <span className="count">{user2?.following.length}</span> following
-          </p>
+          <div>
+            <p>
+              <span className="count">{user2?.followers.length}</span> followers
+            </p>
+            <p>
+              <span className="count">{user2?.following.length}</span> following
+            </p>
+          </div>
         </div>
         <div className="follow">
           <div onClick={toggleFollow}>

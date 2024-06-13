@@ -10,6 +10,7 @@ import PostDetail from "./pages/PostDetail.jsx";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import AdminLogin from "./pages/AdminLogin.jsx";
+import PostDetail_Admin from "./admin_pages/postdetail_admin.jsx";
 
 import UserProfile from "./pages/UserProfile.jsx";
 import Authors from "./pages/Author.jsx";
@@ -56,12 +57,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: (
+      <UserProvider>
+        <AdminLayout />
+      </UserProvider>
+    ),
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <AdminHome /> },
       { path: "reports", element: <Reports /> },
       { path: "posts", element: <Allposts /> },
+      { path: "featured/:id", element: <PostDetail_Admin /> },
     ],
   },
 ]);
