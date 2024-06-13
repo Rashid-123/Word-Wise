@@ -1078,7 +1078,7 @@ textarea:focus {
   }
 }
 
-@media screen and (min-width: 800px) and (max-width: 950px) {
+@media screen and (min-width: 700px) and (max-width: 950px) {
   .posts__container {
     grid-template-columns: repeat(2, 1fr);
   }
