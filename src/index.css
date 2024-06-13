@@ -1050,7 +1050,7 @@ textarea:focus {
     flex-direction: column;
   }
   .post-detail__container {
-    width: 100%;
+    width: 90%;
     background: transparent;
     padding: 0rem;
     border: none;
@@ -1082,9 +1082,7 @@ textarea:focus {
   .posts__container {
     grid-template-columns: repeat(2, 1fr);
   }
-  .footer__categories {
-    flex-direction: column;
-  }
+
   .authors__container {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.7rem;
