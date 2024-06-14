@@ -27,6 +27,8 @@ const DeletePost = ({ postId: id }) => {
       if (response.status === 200) {
         if (location.pathname === `/myposts/${currentUser.id}`) {
           navigate(0);
+        } else if (location.pathname === `/admin/reports`) {
+          navigate(0);
         } else {
           navigate("/");
         }

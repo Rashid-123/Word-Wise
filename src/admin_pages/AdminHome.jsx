@@ -172,7 +172,7 @@ const AdminHome = () => {
       <div className="home_featured">
         <img src={featuredPost?.thumbnailURL} alt="" />
         <h2>{featuredPost?.title}</h2>
-        <Link to={`/admin/featured/${featuredPost?._id}`}>
+        <Link to={`/admin/postDetail/${featuredPost?._id}`}>
           <button className="btn pr">view</button>
         </Link>
       </div>

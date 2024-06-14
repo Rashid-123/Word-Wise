@@ -1173,16 +1173,27 @@ textarea:focus {
 /* ////////////////////////////////////////////////////////// */
 /* ///----------------- REPORT ----------------------- */
 .report {
+  display: grid;
+  grid-template-columns: 12% 30% 58%;
+  padding: 20px;
+  border: 1px solid var(--color--dark-border);
+}
+
+.report_header {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  padding: 20px 10px;
-  border-radius: var(--radius-3);
-  border: 1px solid var(--color--dark-border);
+  justify-content: space-around;
+  padding: 20px;
+  border-bottom: 1px solid var(--color--dark-border2);
+}
+.report_clear {
+  margin: auto;
 }
 .report_user {
   display: flex;
-  gap: 100px;
+  height: 100px;
+  margin: 0px 20px;
+  gap: 20px;
   align-items: center;
   justify-content: space-between;
   padding: 20px 30px;
@@ -1192,20 +1203,23 @@ textarea:focus {
 
 .report_user img {
   margin-bottom: 10px;
-  width: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
 }
 .report_post {
   display: flex;
+  height: 100px;
   align-items: center;
   justify-content: space-around;
-  gap: 100px;
-  padding: 20px 30px;
+
+  padding: 20px;
   border-radius: var(--radius-3);
   border: 1px solid var(--color--dark-border);
 }
 .report_post img {
-  width: 110px;
+  width: 95px;
+  height: 70px;
   border-radius: var(--radius-2);
 }
 

@@ -26,7 +26,7 @@ const Post = ({
       <img src={thumbnail} alt="" />
       <h3>{title}</h3>
       <div>
-        <Link className="btn_1" to={`/admin/featured/${postID}`}>
+        <Link className="btn_1" to={`/admin/postDetail/${postID}`}>
           view
         </Link>
         <Link onClick={setFeatured} className="btn_2">

@@ -67,7 +67,7 @@ const router = createBrowserRouter([
       { index: true, element: <AdminHome /> },
       { path: "reports", element: <Reports /> },
       { path: "posts", element: <Allposts /> },
-      { path: "featured/:id", element: <PostDetail_Admin /> },
+      { path: "postDetail/:id", element: <PostDetail_Admin /> },
     ],
   },
 ]);
