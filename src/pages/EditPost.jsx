@@ -59,9 +59,10 @@ const EditPost = () => {
     "Education",
     "Entertainment",
     "Art",
-    "Investment",
-    "Uncategorized",
     "Weather",
+    "Investment",
+    "programming",
+    "others",
   ];
 
   useEffect(() => {

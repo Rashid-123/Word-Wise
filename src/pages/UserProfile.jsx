@@ -155,6 +155,7 @@ const UserProfile = () => {
             type="email"
             placeholder="Email"
             value={email}
+            disabled
             onChange={(e) => setemail(e.target.value)}
           />
           <input

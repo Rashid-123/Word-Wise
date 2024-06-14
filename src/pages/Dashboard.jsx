@@ -70,7 +70,10 @@ const Dashboard = () => {
           ))}
         </div>
       ) : (
-        <h2 className="center">You have no posts</h2>
+        <h2 className="center">
+          Your dashboard is empty. Why not share a new idea or story with the
+          community?
+        </h2>
       )}
     </section>
   );

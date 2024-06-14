@@ -71,7 +71,10 @@ const Bookmark = () => {
           )}
         </div>
       ) : (
-        <h2 className="center">No Post Found</h2>
+        <h2 className="center">
+          No bookmarks to display. Start saving content for quick access
+          anytime.
+        </h2>
       )}
     </section>
   );
