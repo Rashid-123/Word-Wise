@@ -71,7 +71,7 @@ const Bookmark = () => {
           )}
         </div>
       ) : (
-        <h2 className="center">
+        <h2 className="center blur">
           No bookmarks to display. Start saving content for quick access
           anytime.
         </h2>

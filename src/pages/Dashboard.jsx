@@ -70,7 +70,7 @@ const Dashboard = () => {
           ))}
         </div>
       ) : (
-        <h2 className="center">
+        <h2 className="center blur">
           Your dashboard is empty. Why not share a new idea or story with the
           community?
         </h2>
