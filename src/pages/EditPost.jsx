@@ -61,7 +61,7 @@ const EditPost = () => {
     "Art",
     "Weather",
     "Investment",
-    "programming",
+    "Programming",
     "others",
   ];
 
