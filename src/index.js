@@ -9,6 +9,7 @@ import Home from "./pages/Home.jsx";
 import PostDetail from "./pages/PostDetail.jsx";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
+import LoginwithOTP from "./pages/LoginwithOTP.jsx";
 import AdminLogin from "./pages/AdminLogin.jsx";
 import PostDetail_Admin from "./admin_pages/postdetail_admin.jsx";
 
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
       { path: "posts/:id", element: <PostDetail /> },
       { path: "register", element: <Register /> },
       { path: "login", element: <Login /> },
+      { path: "loginwithOTP", element: <LoginwithOTP /> },
       { path: "admin_login", element: <AdminLogin /> },
       { path: "profile/:id", element: <UserProfile /> },
       { path: "authors", element: <Authors /> },

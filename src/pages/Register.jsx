@@ -28,7 +28,7 @@ const Register = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/users/sendOTP`,
+        `${process.env.REACT_APP_BASE_URL}/users/registerOTP`,
         { email: userData.email }
       );
       setOtpsend(true);

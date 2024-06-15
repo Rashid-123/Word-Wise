@@ -208,25 +208,6 @@ nav {
   border: 1px solid var(--color--dark-border2);
 }
 
-/* .nav__menu li ::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1.5px;
-  background: linear-gradient(
-    to right,
-    var(--color--dark-border2),
-    var(--color--dark-border2)
-  );
-  transition: width 0.3s ease;
-}
-
-.nav__menu li :hover::after {
-  width: 100%;
-} */
-
 .nav__toggle-btn {
   display: none;
 }
@@ -459,7 +440,6 @@ footer {
 .show-more-button {
   background-color: #007bff;
   color: rgb(0, 0, 0);
-  border: none;
   padding: 7px 15px;
   font-size: 13px;
   cursor: pointer;
@@ -644,7 +624,6 @@ textarea:focus {
   background-color: #2563eb;
   border: 1px solid var(--color--dark-border2);
   border-radius: var(--radius-2);
-  color: white;
   cursor: pointer;
   transition: var(--transition);
 }
@@ -652,7 +631,13 @@ textarea:focus {
   color: #020617;
   border-color: var(--color--dark-border);
 }
-
+.Login_with_otp_btn {
+  padding: 5px 10px;
+  color: black;
+  background-color: #3ae040;
+  border-radius: var(--radius-2);
+  margin-top: 3rem;
+}
 /* /////////////////////////////////////////////////// */
 /* //------------------- USER post ---------------------- */
 
@@ -711,7 +696,7 @@ textarea:focus {
 }
 .follow_button:hover {
   cursor: pointer;
-  background-color: #252542;
+  /* background-color: #252542; */
 }
 .follow_button:active {
   color: #2563eb;
