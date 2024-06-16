@@ -24,6 +24,10 @@ const AuthorPosts = () => {
 
   const { id } = useParams();
 
+  useEffect(() => {
+    setActiveTab("posts");
+  }, [id]);
+
   const fetchUserData = async (userId) => {
     try {
       const response = await axios.get(
