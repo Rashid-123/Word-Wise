@@ -10,6 +10,12 @@ const AuthorPosts = () => {
   const [user2, setUser2] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  //
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
+  //
+  const [activeTab, setActiveTab] = useState("posts");
+  //
 
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
@@ -48,7 +54,30 @@ const AuthorPosts = () => {
 
     fetchUsersData();
   }, [currentUser?.id, id, userId]);
+  //
+  //
+  useEffect(() => {
+    const fetchFollowersFollowing = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/users/followers-followings`, // Adjust endpoint as needed
+          { userId: id }
+        );
 
+        setFollowers(response.data.followers);
+        setFollowing(response.data.following);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching followers and following data:", error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchFollowersFollowing();
+  }, [id]);
+  //
+  //
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
@@ -106,12 +135,8 @@ const AuthorPosts = () => {
         <div className="name_box">
           <h2>{user2?.name}</h2>
           <div>
-            <Link to={`/user/followers/${id}`}>
-              <span className="count">{user2?.followers.length}</span> followers
-            </Link>
-            <Link to={`/user/followers/${id}`}>
-              <span className="count">{user2?.following.length}</span> following
-            </Link>
+            <span className="count">{user2?.followers.length}</span> followers
+            <span className="count">{user2?.following.length}</span> following
           </div>
         </div>
         <div className="follow">
@@ -125,33 +150,97 @@ const AuthorPosts = () => {
           </div>
         </div>
       </div>
-      {posts?.length > 0 ? (
-        <div className="user_posts__container2">
-          {posts.map(
-            ({
-              _id: id,
-              title,
-              category,
-              description,
-              creator,
-              thumbnailURL,
-              createdAt,
-            }) => (
-              <PostItem
-                key={id}
-                postID={id}
-                thumbnail={thumbnailURL}
-                category={category}
-                title={title}
-                description={description}
-                authorID={creator}
-                createdAt={createdAt}
-              />
-            )
+      <div className="user_button_container">
+        <button
+          className={activeTab === "posts" ? "button_active" : "button_disable"}
+          onClick={() => setActiveTab("posts")}
+          disabled={activeTab === "posts"}
+        >
+          Posts
+        </button>
+        <button
+          className={
+            activeTab === "followers" ? "button_active" : "button_disable"
+          }
+          onClick={() => setActiveTab("followers")}
+          disabled={activeTab === "followers"}
+        >
+          Followers
+        </button>
+        <button
+          className={
+            activeTab === "following" ? "button_active" : "button_disable"
+          }
+          onClick={() => setActiveTab("following")}
+          disabled={activeTab === "following"}
+        >
+          Followings
+        </button>
+      </div>
+      {activeTab === "posts" &&
+        (posts?.length > 0 ? (
+          <div className="user_posts__container2">
+            {posts.map(
+              ({
+                _id: id,
+                title,
+                category,
+                description,
+                creator,
+                thumbnailURL,
+                createdAt,
+              }) => (
+                <PostItem
+                  key={id}
+                  postID={id}
+                  thumbnail={thumbnailURL}
+                  category={category}
+                  title={title}
+                  description={description}
+                  authorID={creator}
+                  createdAt={createdAt}
+                />
+              )
+            )}
+          </div>
+        ) : (
+          <h2 className="center">No Post Found</h2>
+        ))}
+      {activeTab === "followers" && (
+        <div className="followers_box">
+          {followers.length > 0 ? (
+            followers.map((follower) => (
+              <Link
+                to={`/posts/users/${follower._id}`}
+                key={follower._id}
+                className="follower_ind"
+              >
+                <img src={follower.avatar} alt={follower.name} />
+                <p>{follower.name}</p>
+              </Link>
+            ))
+          ) : (
+            <p className="center"> 0 Followors</p>
           )}
         </div>
-      ) : (
-        <h2 className="center">No Post Found</h2>
+      )}
+      {activeTab === "following" && (
+        <div className="followers_box">
+          {following.length > 0 ? (
+            following.map((following) => (
+              <Link
+                to={`/posts/users/${following._id}`}
+                key={following._id}
+                className="follower_ind"
+              >
+                <img src={following.avatar} alt={following.name} />
+                <p>{following.name}</p>
+              </Link>
+            ))
+          ) : (
+            <p className="center">0 Following</p>
+          )}
+        </div>
       )}
     </section>
   );

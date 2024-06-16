@@ -657,8 +657,6 @@ textarea:focus {
   justify-items: center;
   align-items: center;
   padding: 3rem;
-  margin-bottom: 4rem;
-  /* width: 900px; */
   border: 1px solid var(--color--dark-border);
 }
 .user_info h2 {
@@ -670,7 +668,6 @@ textarea:focus {
 }
 .user_info p {
   display: inline;
-
   font-weight: 400;
   color: #f8fafc;
 }
@@ -682,11 +679,32 @@ textarea:focus {
 }
 .user_info button {
   padding: 8px 24px;
-  background-color: #2563eb;
+  background-color: #0056b3;
   color: #f8fafc;
   font-size: 16px;
   border-radius: var(--radius-4);
   cursor: pointer;
+}
+
+/* // */
+.user_button_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 200px;
+  margin: 2rem auto;
+}
+
+.user_button_container button {
+  color: white;
+  padding: 5px 10px;
+  border-radius: 7px;
+}
+.button_active {
+  background-color: #295a8e;
+}
+.button_disable {
+  background-color: var(--color--dark-border);
 }
 .name_box {
   display: flex;
@@ -723,12 +741,14 @@ textarea:focus {
     padding: 7px 20px;
     font-size: 14px;
   }
+  .user_button_container {
+    padding: 0px 100px;
+  }
 }
 @media screen and (max-width: 650px) {
   .user_info {
     grid-template-columns: repeat(1, 1fr);
     padding: 2.5rem;
-    margin-bottom: 3rem;
     border: 1px solid var(--color--dark-border);
   }
   .user_posts__container2 {
@@ -752,6 +772,9 @@ textarea:focus {
     padding: 7px 20px;
     font-size: 14px;
     margin-top: 20px;
+  }
+  .user_button_container {
+    padding: 0px 50px;
   }
 }
 /*------------------------------- AUTHOR ------------------*/
@@ -792,19 +815,20 @@ textarea:focus {
   margin: auto;
   /* margin-top: 6rem; */
 }
-.follower_lable {
+.follower_label {
   display: flex;
   align-items: center;
   justify-content: space-around;
   margin-top: 7rem;
   margin-bottom: 2rem;
 }
-.follower_lable button {
+.follower_label button {
   font-size: 14px;
   color: var(--color-white);
   letter-spacing: 0.7px;
   padding: 7px 13px;
   border-radius: 5px;
+  cursor: pointer;
 }
 .follower_active {
   background-color: #0056b3;
@@ -822,6 +846,9 @@ textarea:focus {
   border-radius: var(--radius-3);
   cursor: pointer;
   border: 1px solid var(--color--dark-border);
+}
+.follower_ind:hover {
+  border-color: var(--color--dark-border2);
 }
 
 .follower_ind img {

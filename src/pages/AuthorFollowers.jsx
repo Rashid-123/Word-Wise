@@ -40,7 +40,7 @@ const AuthorFollowers = () => {
 
   return (
     <div className="author-followers ">
-      <div className="follower_lable">
+      <div className="follower_label">
         <button
           className={follwerActive ? "follower_active" : "follower_disable"}
           onClick={follower_lable_handler}
@@ -57,7 +57,7 @@ const AuthorFollowers = () => {
         </button>
       </div>
       {follwerActive ? (
-        <div className="followers_box">
+        <div>
           {followers.length > 0 ? (
             followers.map((follower) => (
               <Link
@@ -74,7 +74,7 @@ const AuthorFollowers = () => {
           )}
         </div>
       ) : (
-        <div className="followers_box">
+        <div>
           {following.length > 0 ? (
             following.map((following) => (
               <Link
