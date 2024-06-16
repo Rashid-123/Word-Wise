@@ -123,14 +123,19 @@ const UserProfile = () => {
           </div>
           <div>
             <h1 className="profile_name">{currentUser.name}</h1>
-            <p>
-              <span className="count">{user?.followers?.length}</span>
-              followers
-            </p>
-            <p>
-              <span className="count">{user?.following?.length}</span>
-              following
-            </p>
+
+            <Link to={`/user/followers/${currentUser.id}`}>
+              <p>
+                <span className="count">{user?.followers?.length}</span>
+                followers
+              </p>
+            </Link>
+            <Link to={`/user/followers/${currentUser.id}`}>
+              <p>
+                <span className="count">{user?.following?.length}</span>
+                following
+              </p>
+            </Link>
           </div>
 
           <div className="bookmark_box">

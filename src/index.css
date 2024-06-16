@@ -786,6 +786,63 @@ textarea:focus {
 .author__info p {
   margin-top: 1rem;
 }
+/* ------------------------ USER FOLLOWERS FOLLOWING ---------------------------- */
+.author-followers {
+  width: 50%;
+  margin: auto;
+  /* margin-top: 6rem; */
+}
+.follower_lable {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 7rem;
+  margin-bottom: 2rem;
+}
+.follower_lable button {
+  font-size: 14px;
+  color: var(--color-white);
+  letter-spacing: 0.7px;
+  padding: 7px 13px;
+  border-radius: 5px;
+}
+.follower_active {
+  background-color: #0056b3;
+}
+.follower_disable {
+  background-color: var(--color--dark-border);
+}
+
+.follower_ind {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  margin-top: 15px;
+  border-radius: var(--radius-3);
+  cursor: pointer;
+  border: 1px solid var(--color--dark-border);
+}
+
+.follower_ind img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid var(--color--dark-border2);
+  margin-left: 10px;
+}
+.follower_ind p {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  color: rgb(244, 227, 227);
+  margin-right: 20px;
+}
+@media (max-width: 900px) {
+  .author-followers {
+    width: 70%;
+  }
+}
 
 /*---------------- USER PROFILE ---------------------------*/
 .profile_details_container {

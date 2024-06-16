@@ -28,6 +28,7 @@ import AdminHome from "./admin_pages/AdminHome.jsx";
 import Reports from "./admin_pages/Reports.jsx";
 
 import Allposts from "./admin_pages/Allposts.jsx";
+import AuthorFollowers from "./pages/AuthorFollowers.jsx";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,7 @@ const router = createBrowserRouter([
       { path: "posts/:id/delete", element: <DeletePost /> },
       { path: "posts/categories/:category", element: <CatagoryPosts /> },
       { path: "posts/users/:id", element: <AuthorPosts /> },
+      { path: "user/followers/:id", element: <AuthorFollowers /> },
       { path: "myposts/:id", element: <Dashboard /> },
       { path: "logout", element: <Logout /> },
       { path: "bookmark/:id", element: <Bookmark /> },

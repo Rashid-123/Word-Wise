@@ -2,7 +2,7 @@ import Loader from "../Component/Loader";
 import React, { useState, useEffect, useContext } from "react";
 import PostItem from "../Component/PostItem";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../Context/userContext";
 
 const AuthorPosts = () => {
@@ -106,12 +106,12 @@ const AuthorPosts = () => {
         <div className="name_box">
           <h2>{user2?.name}</h2>
           <div>
-            <p>
+            <Link to={`/user/followers/${id}`}>
               <span className="count">{user2?.followers.length}</span> followers
-            </p>
-            <p>
+            </Link>
+            <Link to={`/user/followers/${id}`}>
               <span className="count">{user2?.following.length}</span> following
-            </p>
+            </Link>
           </div>
         </div>
         <div className="follow">
