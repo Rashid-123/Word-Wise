@@ -14,7 +14,7 @@ const Featured = ({ post }) => {
   }, [post]);
 
   const truncateText = (text, maxLength) => {
-    if (!text) return ""; // Null check added here
+    if (!text) return "";
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + "...";
     }
@@ -22,7 +22,7 @@ const Featured = ({ post }) => {
   };
 
   if (!post) {
-    return null; // or return a loader, placeholder, etc.
+    return null;
   }
 
   return (
